@@ -1,9 +1,11 @@
 from config import DevelopmentConfig, TestEnvironConfig
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 # Initialize an instance of the SQAlchemy object
 db = SQLAlchemy()
+migrate = Migrate()
 
 # List of valid config classes
 VALID_CONFIG_CLASSES = {
@@ -23,5 +25,6 @@ def create_app(config_name):
     
     #connecting the created SQLAchemy object to the flask app
     db.init_app(app)
+    migrate.init_app(app, db)
     
     return app
