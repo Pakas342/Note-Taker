@@ -1,6 +1,6 @@
-from main import bp
+from app.main import bp
 from flask import render_template
-from services import database_services
+from app.services import database_services
 
 @bp.route("/")
 def index():
