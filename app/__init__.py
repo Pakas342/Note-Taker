@@ -27,4 +27,7 @@ def create_app(config_name="DevelopmentConfig"):
     db.init_app(app)
     migrate.init_app(app, db)
     
+    from main import bp as main_bp
+    app.register_blueprint(main_bp)
+    
     return app
