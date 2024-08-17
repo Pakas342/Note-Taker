@@ -1,1 +1,1 @@
-from app.services import database_services
+from app.services.database_services import get_all_projects
