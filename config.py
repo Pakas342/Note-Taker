@@ -1,6 +1,7 @@
+from dotenv import load_dotenv
 import os
 
-print(os.urandom(12))
+load_dotenv()
 
 class Config(object):
     TESTING = False

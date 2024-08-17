@@ -4,3 +4,5 @@
 .env
 # Pycache folders
 __pycache__/
+# Sqlite Database
+data/ 
