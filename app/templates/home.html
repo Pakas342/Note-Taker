@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lan="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Sudor Y Sangre</h1>
-</body>
-</html>
+{% extends "template.html" %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+<h1>To-do List Project</h1>
+<!-- Tab links -->
+<div class="container">
+  <aside>
+    <ul class="tabs">
+      {% for category in all_categories %}
+      <li class="tab" onclick="openCategory(event, 'category_{{ category.id }}')">{{ category.name }}</li>
+      {% endfor %}
+      <li class="tab" onclick="openCategory(event, 'category_0')">Add New Category</li>
+    </ul>
+  </aside>
+  <main>
+    {% for category in all_categories %}
+    <div id="category_{{ category.id }}" class="content">{{category.id}}</div>
+    {% endfor %}
+    <div id="category_0" class="content">New Category Form</div>
+  </main>
+</div>
+  
+
+
+{% endblock content %}

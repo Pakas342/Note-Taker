@@ -1,0 +1,54 @@
+body {
+    font-family: "Raleway", sans-serif;
+    margin: 0
+}
+
+h1 {
+    font-family: "Libre Baskerville", serif;
+    margin-left: 28px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  height: 80vh;
+}
+
+.sidebar {
+  background-color: whitesmoke;
+}
+  
+.tabs {
+  padding: 0;
+}
+
+.tab {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.tab.active {
+  background-color: #ccc; 
+}
+
+/* Create an active/current tablink class */
+.tab:hover {
+  background-color: #ccc;
+}
+
+main {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: whitesmoke;
+}
+
+.content {
+  display: none;
+}
+
+.content.active {
+  display: block;
+}
