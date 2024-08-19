@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired, URL
+from wtforms import StringField, SubmitField, HiddenField
+from wtforms.validators import DataRequired
 
 class CreateCategoryForm(FlaskForm):
     name = StringField("Category Title", validators=[DataRequired()])
@@ -8,7 +8,7 @@ class CreateCategoryForm(FlaskForm):
     
 class CreateProjectForm(FlaskForm):
     name = StringField("Project Title", validators=[DataRequired()])
-    category = 
+    category_id = HiddenField('Category ID', validators=[DataRequired()])
     submit = SubmitField("Submit")
     
 class CreateTaskForm(FlaskForm):

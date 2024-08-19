@@ -6,7 +6,7 @@ from flask_bootstrap import Bootstrap5
 
 # Initialize an instance of the SQAlchemy object
 db = SQLAlchemy()
-migrate = Migrate()
+migrate = Migrate(render_as_batch=True)
 
 # List of valid config classes
 VALID_CONFIG_CLASSES = {

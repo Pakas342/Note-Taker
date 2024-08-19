@@ -4,7 +4,6 @@ from sqlalchemy import Integer, String, Text, ForeignKey, DateTime, Table, Colum
 from typing import List
 from datetime import datetime
 
-# Associative table for Categories and Projects
 
 class Category(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -19,7 +18,8 @@ class Project(db.Model):
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
     due_date: Mapped[datetime] = mapped_column(DateTime)
-    category: Mapped["Category"] = relationship(back_populates="project")
+    category_id: Mapped[int] = mapped_column(ForeignKey("category.id"))
+    category: Mapped["Category"] = relationship(back_populates="projects")
     tasks: Mapped[List["Task"]] = relationship(back_populates="project")
     
 class Task(db.Model):
