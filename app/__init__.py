@@ -2,6 +2,7 @@ from config import DevelopmentConfig, TestEnvironConfig
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_bootstrap import Bootstrap5
 
 # Initialize an instance of the SQAlchemy object
 db = SQLAlchemy()
@@ -27,6 +28,10 @@ def create_app(config_name="DevelopmentConfig"):
     db.init_app(app)
     migrate.init_app(app, db)
     
+    # Initialize the bootstap instance
+    bootstrap = Bootstrap5(app) 
+    
+    # Register the created and linked blueprints
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
     

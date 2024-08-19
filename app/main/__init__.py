@@ -1,4 +1,5 @@
 from flask import Blueprint
+from app.main import forms
 
 bp = Blueprint("main", __name__)
 

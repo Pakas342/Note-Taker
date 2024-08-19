@@ -15,14 +15,14 @@ project_category = Table(
 
 class Category(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
+    name: Mapped[str] = mapped_column(String(1000), unique=True, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
     projects: Mapped[List["Project"]] = relationship(secondary=project_category, back_populates="categories")
     
 class Project(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
+    name: Mapped[str] = mapped_column(String(1000), unique=True, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
     due_date: Mapped[datetime] = mapped_column(DateTime)
@@ -31,7 +31,7 @@ class Project(db.Model):
     
 class Task(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
+    name: Mapped[str] = mapped_column(String(1000), unique=True, nullable=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.now, onupdate=datetime.now)
     due_date: Mapped[datetime] = mapped_column(DateTime)
