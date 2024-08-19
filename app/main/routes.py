@@ -15,11 +15,11 @@ def index():
         add_category(category_form)
         return redirect(url_for('main.index'))
     
-    if form_name == "project_form" and  project_form.validate_on_submit():
+    if form_name == "project_form" and project_form.validate_on_submit():
         add_project(project_form)
         return redirect(url_for('main.index'))
     
-    if form_name == "task_form" and  task_form.validate_on_submit():
+    if form_name == "task_form" and task_form.validate_on_submit():
         add_task(task_form)
         return redirect(url_for('main.index'))
     
