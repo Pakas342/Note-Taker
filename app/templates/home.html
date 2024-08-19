@@ -20,7 +20,7 @@
     <h4>Projects</h4>
     {% for category in all_categories %}
     <div class="tab-pane fade" id="v-pills-{{category.name}}" role="tabpanel" aria-labelledby="v-pills-{{category.name}}-tab">
-      {% for project in all_categories.projects %}
+      {% for project in category.projects %}
       <h5>{{project.name}} ({{project.due_date}})</h5>
       <ul> 
         {% for task in project.tasks %}
@@ -29,15 +29,18 @@
         </li>
         {% endfor %}
         <li>Add new task to {{project.name}}</li>
-        {{ render_form(task_form, button_map={"submit": "primary"}) }}
+        <form method="POST" action="{{ url_for('main.index') }}">
+          <input type="hidden" name="project_id" value="{{ project.id }}">
+          {{ render_form(task_form, button_map={"submit": "primary"}) }}
       </ul>
       {% endfor %}
       <h5>Add new Project</h5>
-      {{ render_form(project_form, button_map={"submit": "primary"}) }}
-
+      <form method="POST" action="{{ url_for('main.index') }}">
+        <input type="hidden" name="category_id" value="{{ category.id }}">
+        {{ render_form(project_form, button_map={"submit": "primary"}) }}
     </div>
     {% endfor %}
-    <div class="tab-pane fade" id="v-pills-new-category role="tabpanel" aria-labelledby="v-pills-new-category-tab">{{ render_form(category_form, button_map={"submit": "primary"}) }}</div>
+    <div class="tab-pane fade" id="v-pills-new-category" role="tabpanel" aria-labelledby="v-pills-new-category-tab">{{ render_form(category_form, button_map={"submit": "primary"}) }}</div>
   </div>
 </div>
 

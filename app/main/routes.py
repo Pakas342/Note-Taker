@@ -1,6 +1,6 @@
 from app.main import bp
 from app.main.forms import CreateCategoryForm, CreateTaskForm, CreateProjectForm
-from flask import render_template, url_for, redirect
+from flask import render_template, url_for, redirect, request
 from app.services import get_all_categories, add_category, add_task, add_project
 
 @bp.route("/", methods=['GET', 'POST'])
@@ -9,18 +9,17 @@ def index():
     project_form = CreateProjectForm()
     task_form = CreateTaskForm()
     
-    if category_form.validate_on_submit():
-        print("Category From Triggered")
+    form_name = request.form.get("form_name")
+    
+    if form_name == "category_form" and category_form.validate_on_submit():
         add_category(category_form)
         return redirect(url_for('main.index'))
     
-    if project_form.validate_on_submit():
-        print("Category From Triggered")
+    if form_name == "project_form" and  project_form.validate_on_submit():
         add_project(project_form)
         return redirect(url_for('main.index'))
     
-    if task_form.validate_on_submit():
-        print("Category From Triggered")
+    if form_name == "task_form" and  task_form.validate_on_submit():
         add_task(task_form)
         return redirect(url_for('main.index'))
     
