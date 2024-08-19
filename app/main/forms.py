@@ -8,7 +8,7 @@ class CreateCategoryForm(FlaskForm):
     
 class CreateProjectForm(FlaskForm):
     name = StringField("Project Title", validators=[DataRequired()])
-    
+    category = 
     submit = SubmitField("Submit")
     
 class CreateTaskForm(FlaskForm):
