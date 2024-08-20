@@ -11,6 +11,7 @@ class CreateProjectForm(FlaskForm):
     form_name = HiddenField('form_name', default='project_form')
     name = StringField("Project Title", validators=[DataRequired()])
     category_id = HiddenField('Category ID', validators=[DataRequired()])
+    due_date = StringField('Due Date', validators=[DataRequired()])
     submit = SubmitField("Submit")
     
 class CreateTaskForm(FlaskForm):
