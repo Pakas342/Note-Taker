@@ -59,7 +59,11 @@
                           </h2>
                           <div id="accordion-item-task-{{ task.id }}" class="accordion-collapse collapse" aria-labelledby="heading-task-{{ task.id }}">
                             <div class="accordion-body">
-                              {{task.content}}
+                              {% if task.content %}
+                                {{ task.content }}
+                              {% else %}
+                                (No task content)
+                              {% endif %}
                             </div>
                           </div>
                         </div>
