@@ -27,30 +27,94 @@
     <h4>Projects</h4>
     {% for category in all_categories %}
     <div class="tab-pane fade" id="v-pills-{{category.name}}" role="tabpanel" aria-labelledby="v-pills-{{category.name}}-tab">
-      {% for project in category.projects %}
-      <h5>{{project.name}} ({{project.due_date}})</h5>
-      <ul> 
-        {% for task in project.tasks %}
-        <li>
-          {{task.name}} ({{task.due_date}})
-        </li>
+      <div class="accordion" id="ProjectsAccordion">
+        {% for project in category.projects %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading-project-{{project.id}}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-item-project-{{project.id}}" aria-expanded="true"  aria-controls="accordion-item-project-{{project.id}}">
+                  {{ project.name }} 
+                  {% if project.due_date %}
+                    ({{ project.due_date.strftime('%d-%m-%Y') }})
+                  {% else %}
+                    (No due date)
+                  {% endif %}
+                </button>
+            </h2>
+            <div id="accordion-item-project-{{project.id}}" class="accordion-collapse collapse" aria-labelledby="heading-project-{{project.id}}">
+                <div class="accordion-body">
+                  <ul>
+                    {% for task in project.tasks %}
+                    <li>
+                      <div class="accordion" id="tasksAccordion">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="heading-task-{{ task.id }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-item-task-{{ task.id }}" aria-expanded="true" aria-controls="accordion-item-task-{{ task.id }}">
+                              {{ task.name }} 
+                              {% if task.due_date %}
+                                ({{ task.due_date.strftime('%d-%m-%Y') }})
+                              {% else %}
+                                (No due date)
+                              {% endif %}
+                            </button>
+                          </h2>
+                          <div id="accordion-item-task-{{ task.id }}" class="accordion-collapse collapse" aria-labelledby="heading-task-{{ task.id }}">
+                            <div class="accordion-body">
+                              {{task.content}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    {% endfor %}
+                    <li>
+                      <div class="accordion" id="tasksAccordion">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="heading-task-add">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-item-task-add" aria-expanded="true" aria-controls="accordion-item-task-add">
+                              Add new task to {{project.name}}
+                            </button>
+                          </h2>
+                          <div id="accordion-item-task-add" class="accordion-collapse collapse" aria-labelledby="heading-task-add">
+                            <div class="accordion-body">
+                              <form method="POST" action="{{ url_for('main.index') }}">
+                                <input type="hidden" name="project_id" value="{{ project.id }}">
+                                {{ render_form(task_form, button_map={"submit": "primary"}) }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>                    
+                </div>
+            </div>
+        </div>
         {% endfor %}
-        <li>Add new task to {{project.name}}</li>
-        <form method="POST" action="{{ url_for('main.index') }}">
-          <input type="hidden" name="project_id" value="{{ project.id }}">
-          {{ render_form(task_form, button_map={"submit": "primary"}) }}
-      </ul>
-      {% endfor %}
-      <h5>Add new Project</h5>
-      <form method="POST" action="{{ url_for('main.index') }}">
-        <input type="hidden" name="category_id" value="{{ category.id }}">
-        {{ render_form(project_form, button_map={"submit": "primary"}) }}
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading-task-add-new-task">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#add-new-project-accordion-item" aria-expanded="true" aria-controls="add-new-project-accordion-item">
+                Add new Project
+              </button>
+          </h2>
+          <div id="add-new-project-accordion-item" class="accordion-collapse collapse" aria-labelledby="heading-task-add-new-task">
+              <div class="accordion-body">
+                <form method="POST" action="{{ url_for('main.index') }}">
+                  <input type="hidden" name="category_id" value="{{ category.id }}">
+                  {{ render_form(project_form, button_map={"submit": "primary"}) }}
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
     {% endfor %}
     <div class="tab-pane fade" id="v-pills-new-category" role="tabpanel" aria-labelledby="v-pills-new-category-tab">{{ render_form(category_form, button_map={"submit": "primary"}) }}</div>
   </div>
 </div>
 
+<!-- Jquery for bootstrap -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Own Js JS -->
 <script src="../static/js/tab_handler.js"></script>
 <script src="../static/js/date_picker.js"></script>
 {% endblock content %}

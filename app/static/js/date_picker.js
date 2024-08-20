@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('#due_date').forEach( datePicker => {
+        datePicker.classList.add("btn", "btn-info")
         new easepick.create({
             element: datePicker,
             css: [
