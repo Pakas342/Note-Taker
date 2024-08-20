@@ -8,7 +8,7 @@ def get_all_categories():
 
 def add_category(new_category_form: CreateCategoryForm):
     new_category = Category(
-        name=new_category_form.name.data
+        name = new_category_form.name.data
     )
     db.session.add(new_category)
     db.session.commit()
@@ -16,7 +16,7 @@ def add_category(new_category_form: CreateCategoryForm):
 def add_project(new_project_form: CreateProjectForm):
     date_timestamp = datetime.strptime(new_project_form.due_date.data, '%Y-%m-%d')
     new_project = Project(
-        name=new_project_form.name.data,
+        name = new_project_form.name.data,
         category_id = new_project_form.category_id.data,
         due_date = date_timestamp
     )
@@ -25,8 +25,9 @@ def add_project(new_project_form: CreateProjectForm):
     
 def add_task(new_task_form: CreateTaskForm):
     new_task = Task(
-        name=new_task_form.name.data,
+        name = new_task_form.name.data,
         project_id = new_task_form.project_id.data,
+        content = new_task_form.content.data
     )
     db.session.add(new_task)
     db.session.commit()

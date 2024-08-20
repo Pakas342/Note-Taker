@@ -60,7 +60,7 @@
                           <div id="accordion-item-task-{{ task.id }}" class="accordion-collapse collapse" aria-labelledby="heading-task-{{ task.id }}">
                             <div class="accordion-body">
                               {% if task.content %}
-                                {{ task.content }}
+                                {{ task.content|safe }}
                               {% else %}
                                 (No task content)
                               {% endif %}
@@ -73,15 +73,16 @@
                     <li>
                       <div class="accordion" id="tasksAccordion">
                         <div class="accordion-item">
-                          <h2 class="accordion-header" id="heading-task-add">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-item-task-add" aria-expanded="true" aria-controls="accordion-item-task-add">
+                          <h2 class="accordion-header" id="heading-task-add-{{project.id}}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accordion-item-task-add-{{project.id}}" aria-expanded="true" aria-controls="accordion-item-task-add-{{project.id}}">
                               Add new task to {{project.name}}
                             </button>
                           </h2>
-                          <div id="accordion-item-task-add" class="accordion-collapse collapse" aria-labelledby="heading-task-add">
+                          <div id="accordion-item-task-add-{{project.id}}" class="accordion-collapse collapse" aria-labelledby="heading-task-add-{{project.id}}">
                             <div class="accordion-body">
                               <form method="POST" action="{{ url_for('main.index') }}">
                                 <input type="hidden" name="project_id" value="{{ project.id }}">
+                                {{ ckeditor.load() }} {{ ckeditor.config(name='content') }}
                                 {{ render_form(task_form, button_map={"submit": "primary"}) }}
                             </div>
                           </div>

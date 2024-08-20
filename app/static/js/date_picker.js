@@ -13,4 +13,10 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
     })
+
+    document.querySelectorAll('.calendar').forEach(calendar => {
+        calendar.style.position = 'relative';
+        calendar.style.zIndex = "1000";
+    });
+
 })
