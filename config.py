@@ -11,7 +11,7 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_DATABASE_URI = os.getenv("LOCAL_DEV_DB_URI")
     
 class TestEnvironConfig(Config):
-    TESTING = True
+    TESTING = False
     SECRET_KEY = os.environ["TEST_SECRET_KEY"]
     SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL"]
     
