@@ -12,7 +12,7 @@ class DevelopmentConfig(Config):
     
 class TestEnvironConfig(Config):
     TESTING = True
-    SECRET_KEY = os.getenv["TEST_SECRET_KEY"]
-    SQLALCHEMY_DATABASE_URI = os.environ["POSTGRESQL_TEST_DB_URI"]
+    SECRET_KEY = os.environ("TEST_SECRET_KEY")
+    SQLALCHEMY_DATABASE_URI = os.environ("POSTGRESQL_TEST_DB_URI")
     
     
