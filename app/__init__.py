@@ -16,7 +16,7 @@ VALID_CONFIG_CLASSES = {
     'TestEnvironConfig': TestEnvironConfig,
 }
 
-def create_app(config_name="DevelopmentConfig"):
+def create_app(config_name="TestEnvironConfig"):
     # Checking if the given config is valid, and initializing a flask app
     if config_name not in VALID_CONFIG_CLASSES:
         raise ValueError(f"This config name {config_name} isn't part of the valid config classes!")
